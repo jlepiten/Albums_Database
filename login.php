@@ -12,6 +12,7 @@
 <?php
 
 require('db.php');
+$conn = connect();
 require('createTables.php');
 session_start();
 
@@ -24,7 +25,7 @@ session_start();
 		$password = stripslashes($_REQUEST['password']);
 		$password = mysqli_real_escape_string($con,$password);
 		$query = "SELECT * FROM `users` WHERE username='$username' AND password='$password'";
-		$result = mysqli_query($con,$query) or die(mysqli_error());
+		$result = mysqli_query($conn,$query) or die(mysqli_error());
 		$rows = mysqli_num_rows($result);
 
 		if($rows==1){
@@ -38,6 +39,8 @@ session_start();
 
 			echo "<div class='form'><h3>Username/password is incorrect.</h3><br/>Click here to <a href='login.php'>Login</a></div>";
 		}
+
+		disconnect();
 
 	}
 	else{

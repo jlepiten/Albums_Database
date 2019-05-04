@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>input album data</title>
+	<title>input artist data</title>
 	<link rel="stylesheet" href="css/style.css" />
 </head>
 
@@ -18,11 +18,11 @@ if(isset($_POST['id'])){
 
 	// arguments
 	$id = $_POST['id'];
-	$title = $_POST['title'];
-	$artist = $_POST['artist'];
-	$year = $_POST['year'];
+	$name = $_POST['name'];
+	$ethnicity = $_POST['ethnicity'];
+	$age = $_POST['age'];
 
-	$query = "INSERT INTO albums VALUES($id, $title, $artist, $year)";
+	$query = "INSERT INTO artists VALUES($id, $name, $ethnicity, $age)";
 	$result = mysqli_query($conn, $query);
 
 	// checks if query is successful
@@ -30,13 +30,13 @@ if(isset($_POST['id'])){
 
 		echo "<h3>Query successful. Your entered data: </h3>";
 
-		// display all data in Albums table
-		$query = "SELECT * FROM albums";
+		// display all data in artists table
+		$query = "SELECT * FROM artists";
 		$dresult = mysqli_query($conn, $query);
 		echo "<table>";
 		while ($row = mysql_fetch_array($result)) {
-			echo "<tr><td>" . $row['id'] . "</td><td>" . $row['title'] .
-			"</td><td>" . $row['artist'] . "</td><td>" . $row['year']  . "</td></tr>";
+			echo "<tr><td>" . $row['id'] . "</td><td>" . $row['name'] .
+			"</td><td>" . $row['ethnicity'] . "</td><td>" . $row['age']  . "</td></tr>";
 		}
 		echo "</table>";
 
@@ -55,13 +55,13 @@ if(isset($_POST['id'])){
 
 <div class="container">
 	<div class="form">
-		<h2>Albums</h2>
+		<h2>Artists</h2>
 
-		<form action="album.php" method="POST" name="album">
+		<form action="artist.php" method="POST" name="artist">
 			<input type="number" name="id" placeholder="id #" required />
-			<input type="text" name="title" placeholder="title" required />
-			<input type="text" name="artist" placeholder="artist" required />
-			<input type="text" name="year" placeholder="year" required />
+			<input type="text" name="name" placeholder="name" required />
+			<input type="text" name="ethnicity" placeholder="ethnicity" required />
+			<input type="number" name="age" placeholder="age" required />
 			<input name="submit" type="submit" value="Submit"/>
 		</form>
 

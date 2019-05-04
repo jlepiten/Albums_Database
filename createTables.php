@@ -1,6 +1,5 @@
 <?php
 
-require('db.php');
 
 function execute_query($query) {
 
@@ -13,25 +12,29 @@ function execute_query($query) {
     }
 }
 
-$query = sprintf("CREATE TABLE albums (
+$query = "DROP TABLE IF EXISTS albums";
+execute_query($query);
+
+$query = "CREATE TABLE albums (
           id INT(2) PRIMARY KEY,
-          title VARCHAR(40) NOT NULL,
-          artist VARCHAR(30) NOT NULL,
+          title VARCHAR(40),
+          artist VARCHAR(30),
           year INT(4) NOT NULL
-)ENGINE=InnoDB");
+) ENGINE=InnoDB";
 execute_query($query);
 //echo ("Error description: " . mysqli_error($con));
 
-// $query = "CREATE TABLE Albums(id INT PRIMARY KEY, title TEXT,
-//     artist TEXT, year INT) ENGINE=InnoDB";
-// execute_query($query);
-//
-// $query = "DROP TABLE IF EXISTS Artists";
-// execute_query($query);
-//
-// $query = "CREATE TABLE Artists(id INT PRIMARY KEY, name TEXT,
-//      ethnicity TEXT, age INT) ENGINE=InnoDB";
-// execute_query($query);
+$query = "DROP TABLE IF EXISTS artists";
+execute_query($query);
+
+$query = "CREATE TABLE artists (
+          id INT(2) PRIMARY KEY,
+          name VARCHAR(40),
+          ethnicity VARCHAR(30),
+          age INT(2)
+) ENGINE=InnoDB";
+execute_query($query);
+
 
 //mysql_close();
 
